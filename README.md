@@ -7,12 +7,14 @@ A full-stack Node.js application built with Express.js that provides a RESTful A
 Watch the application in action:
 
 <div align="center">
-  <video width="100%" controls style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin: 20px 0; max-width: 800px;">
-    <source src="docs/Recording%202025-11-12%20142844.mp4" type="video/mp4">
-    <source src="./docs/Recording 2025-11-12 142844.mp4" type="video/mp4">
-    Your browser does not support the video tag. [Download the video](./docs/Recording%202025-11-12%20142844.mp4) to view it.
-  </video>
+  
+**📹 [Click here to view the demo video](./docs/Recording%202025-11-12%20142844.mp4)**
+
+*The video demonstrates the full application functionality including the web interface and API endpoints.*
+
 </div>
+
+> **Tip:** For best viewing experience, download the video file from the `docs/` folder. GitHub's markdown renderer has limited support for embedded video playback.
 
 ## ✨ Features
 
