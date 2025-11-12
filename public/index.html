@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Express API - User Management</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🚀 Express API</h1>
+      <p>User Management System</p>
+    </header>
+
+    <div class="card">
+      <h2>API Endpoints</h2>
+      <ul class="endpoints">
+        <li>
+          <span class="endpoint-method method-get">GET</span>
+          <span class="endpoint-path">/api/test</span>
+        </li>
+        <li>
+          <span class="endpoint-method method-get">GET</span>
+          <span class="endpoint-path">/api/users</span>
+          <span style="color: #6c757d; margin-left: 10px;">Get all users</span>
+        </li>
+        <li>
+          <span class="endpoint-method method-get">GET</span>
+          <span class="endpoint-path">/api/users/:id</span>
+          <span style="color: #6c757d; margin-left: 10px;">Get user by ID</span>
+        </li>
+        <li>
+          <span class="endpoint-method method-post">POST</span>
+          <span class="endpoint-path">/api/users</span>
+          <span style="color: #6c757d; margin-left: 10px;">Create new user</span>
+        </li>
+        <li>
+          <span class="endpoint-method method-put">PUT</span>
+          <span class="endpoint-path">/api/users/:id</span>
+          <span style="color: #6c757d; margin-left: 10px;">Update user</span>
+        </li>
+        <li>
+          <span class="endpoint-method method-delete">DELETE</span>
+          <span class="endpoint-path">/api/users/:id</span>
+          <span style="color: #6c757d; margin-left: 10px;">Delete user</span>
+        </li>
+      </ul>
+      <div class="actions">
+        <a href="/users" class="btn">View All Users</a>
+        <a href="/api/users" class="btn btn-secondary" target="_blank">API JSON Response</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

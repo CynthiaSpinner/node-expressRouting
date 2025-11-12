@@ -1,56 +1,299 @@
-# Node Exercise Repo
+# Express User Management API
 
-## Getting Started
+A full-stack Node.js application built with Express.js that provides a RESTful API for user management with a modern, responsive web interface. This project demonstrates Express routing, CRUD operations, and serves both API endpoints and static web pages.
 
-This project is configured with babel so that you can use ES6 Module syntax. It's also bootstrapped for you with extra basic development tools so to get started, be sure to install all dependencies with `npm install`.
+## 🎥 Demo Video
 
-## Running the Development Server
+Watch the application in action:
 
-To run the development server, use `npm run dev`.
+<video width="100%" controls style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin: 20px 0;">
+  <source src="./public/videos/Recording 2025-11-12 142844.mp4" type="video/mp4">
+  Your browser does not support the video tag. 
+  [Download the video](./public/videos/Recording%202025-11-12%20142844.mp4) to view it.
+</video>
 
-This will re-transpile and restart the server with babel and nodemon.
+## ✨ Features
 
-## Running the Server
+- **RESTful API** - Complete CRUD operations for user management
+- **Modern Web Interface** - Beautiful, responsive UI with gradient design and smooth animations
+- **Modular Routing** - Organized Express routes with separate route files
+- **Mock Database** - In-memory data storage for development and testing
+- **ES6 Modules** - Modern JavaScript syntax with Babel transpilation
+- **Error Handling** - Centralized error handling middleware
+- **Static File Serving** - Serves HTML, CSS, and media files
+- **Development Tools** - Hot reload with nodemon for faster development
 
-To run the server outside of development, use `npm start`.
+## 🚀 Quick Start
 
-This will transpile the server code with babel and start the server with node.
+### Prerequisites
 
-## Project Structure
+- Node.js (v14 or higher)
+- npm (Node Package Manager)
 
-This project is bootstrapped with files to get started, files for configuration and files for mock database queries. You will only be working in `server.js`, `routes/`, and `config/`.
+### Installation
 
-```txt
-config/
-    index.js
-mockdb/
-routes/
-    index.js
-.babelrc
-.env.template
-.gitignore
-package-lock.json
-server.js
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd node-expressRouting
 ```
 
-## Config
+2. Install dependencies:
+```bash
+npm install
+```
 
-The `config/` folder is used to load and export node environment variables. Currently, it uses the `dotenv` package to load the environment variables when you start the server process, and exports them under `mysql` and `port`.
+3. Create a `.env` file in the root directory:
+```env
+PORT=5000
+DB_HOST=localhost
+DB_USER=root
+DB_PASS=password
+DB_SCHEMA=your_database
+```
 
-`port` will be used to set the express server to listen on the specified port number.
+### Running the Application
 
-`mysql` will be used later to set up a connection to a MySQL database.
+**Development Mode** (with auto-reload):
+```bash
+npm run dev
+```
 
-### .env File
+**Production Mode**:
+```bash
+npm start
+```
 
-There is a `.env.template` file in the root directory. You will need to create a local `.env` file and copy the contents of the `.env.template` file in to `.env`. Be sure to change the `PORT` value to `PORT=5000`. The `DB_` values will be changed in a later lesson.
+The server will start on `http://localhost:5000` (or the port specified in your `.env` file).
 
-## MockDB
+## 📖 Usage
 
-The `mockdb/` folder contains a mock service for interacting with user data.
+### Web Interface
 
-- The `getAll` method returns the data list
-- The `getOne` method takes in an user object id parameter and returns a single user data object
-- The `add` method takes in an user object parameter and adds it to the data list
-- The `update` method takes in an user id and object as parameters and updates one user object in the data list
-- The `delete` method takes in an user id parameter and removes one user object the data list
+- **Home Page**: `http://localhost:5000/` - API documentation and navigation
+- **Users Page**: `http://localhost:5000/users` - Visual display of all users in a card-based layout
+
+### API Endpoints
+
+All API endpoints are prefixed with `/api`.
+
+#### Get All Users
+```http
+GET /api/users
+```
+
+**Response:**
+```json
+[
+  {
+    "id": 1,
+    "firstName": "Frodo",
+    "lastName": "Baggins",
+    "role": "admin",
+    "_created": "Wed Nov 12 2025 14:28:44 GMT-0500"
+  },
+  ...
+]
+```
+
+#### Get User by ID
+```http
+GET /api/users/:id
+```
+
+**Example:**
+```http
+GET /api/users/1
+```
+
+#### Create User
+```http
+POST /api/users
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "role": "member"
+}
+```
+
+**Response:**
+```json
+{
+  "insertedRow": {
+    "id": 5,
+    "firstName": "John",
+    "lastName": "Doe",
+    "role": "member",
+    "_created": "Wed Nov 12 2025 14:28:44 GMT-0500"
+  },
+  "success": true
+}
+```
+
+#### Update User
+```http
+PUT /api/users/:id
+Content-Type: application/json
+
+{
+  "firstName": "Jane",
+  "lastName": "Doe",
+  "role": "admin"
+}
+```
+
+**Example:**
+```http
+PUT /api/users/1
+```
+
+#### Delete User
+```http
+DELETE /api/users/:id
+```
+
+**Example:**
+```http
+DELETE /api/users/1
+```
+
+**Response:**
+```json
+{
+  "removedRowId": 1,
+  "success": true
+}
+```
+
+## 📁 Project Structure
+
+```
+node-expressRouting/
+├── config/
+│   └── index.js              # Environment configuration loader
+├── mockdb/
+│   └── index.js              # Mock database service with CRUD methods
+├── public/
+│   ├── css/
+│   │   └── style.css         # Application stylesheet
+│   ├── videos/
+│   │   └── Recording 2025-11-12 142844.mp4
+│   ├── index.html            # Home page
+│   └── users.html            # Users display page
+├── routes/
+│   ├── index.js              # Main router (mounts user routes)
+│   └── users.routes.js       # User CRUD routes
+├── server.js                 # Express server setup and configuration
+├── .babelrc                  # Babel configuration
+├── .env                      # Environment variables (create from .env.template)
+├── .env.template             # Environment variables template
+├── package.json
+└── README.md
+```
+
+## 🛠️ Technologies
+
+- **Node.js** - JavaScript runtime environment
+- **Express.js** - Web application framework
+- **Babel** - JavaScript compiler for ES6+ syntax
+- **Nodemon** - Development tool for auto-restarting server
+- **dotenv** - Environment variable management
+- **HTML5/CSS3** - Modern web standards for the frontend
+
+## ⚙️ Configuration
+
+### Environment Variables
+
+The application uses the following environment variables (defined in `.env`):
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `PORT` | Server port number | `5000` |
+| `DB_HOST` | Database host address | `localhost` |
+| `DB_USER` | Database username | `root` |
+| `DB_PASS` | Database password | - |
+| `DB_SCHEMA` | Database schema name | - |
+
+### Mock Database
+
+The `mockdb` service provides an in-memory database with the following methods:
+
+- `getAll()` - Returns all users as an array
+- `getOne(id)` - Returns a single user by ID (returns `null` if not found)
+- `add(newUser)` - Adds a new user and returns the inserted user with success status
+- `update(id, updatedUser)` - Updates an existing user and returns the updated user
+- `remove(id)` - Removes a user by ID and returns success status
+
+**User Object Structure:**
+```javascript
+{
+  id: Number,
+  firstName: String,
+  lastName: String,
+  role: String, // 'admin', 'member', or 'guest'
+  _created: String // ISO date string
+}
+```
+
+## 🎨 Features in Detail
+
+### Web Interface
+
+- **Responsive Design** - Works seamlessly on desktop, tablet, and mobile devices
+- **Modern UI** - Gradient purple theme with card-based layouts
+- **Interactive Elements** - Hover effects, smooth transitions, and animations
+- **Color-Coded Methods** - Visual indicators for HTTP methods (GET, POST, PUT, DELETE)
+- **Role Badges** - Visual distinction for user roles (admin, member, guest)
+- **Real-time Updates** - JavaScript-powered dynamic content loading
+
+### API Features
+
+- **RESTful Design** - Follows REST principles for clean, predictable endpoints
+- **JSON Format** - All requests and responses use JSON
+- **Error Handling** - Centralized error middleware for consistent error responses
+- **Async Operations** - Uses async/await for database operations
+- **Modular Architecture** - Separated route files for better organization
+
+## 🔧 Development
+
+### Scripts
+
+- `npm run dev` - Start development server with hot reload
+- `npm start` - Start production server
+- `npm test` - Run tests (currently not configured)
+
+### Code Style
+
+- ES6+ JavaScript syntax
+- ES6 modules (import/export)
+- Async/await for asynchronous operations
+- Express Router for route organization
+
+## 📝 API Documentation Summary
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/test` | Test endpoint |
+| `GET` | `/api/users` | Retrieve all users |
+| `GET` | `/api/users/:id` | Retrieve a single user by ID |
+| `POST` | `/api/users` | Create a new user |
+| `PUT` | `/api/users/:id` | Update an existing user |
+| `DELETE` | `/api/users/:id` | Delete a user |
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
+
+ISC License
+
+## 👤 Author
+
+Ben Bryant
+
+---
+
+**Built with ❤️ using Express.js and Node.js**

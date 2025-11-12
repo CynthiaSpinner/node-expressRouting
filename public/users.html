@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users - Express API</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>👥 Users</h1>
+      <p>All registered users</p>
+    </header>
+
+    <div class="card">
+      <div class="actions">
+        <a href="/" class="btn">← Back to Home</a>
+        <button onclick="loadUsers()" class="btn btn-secondary">🔄 Refresh</button>
+      </div>
+      
+      <div id="loading" class="loading">Loading users...</div>
+      <div id="error" class="error" style="display: none;"></div>
+      <div id="users-container" class="users-grid" style="display: none;"></div>
+    </div>
+  </div>
+
+  <script>
+    async function loadUsers() {
+      const loadingEl = document.getElementById('loading');
+      const errorEl = document.getElementById('error');
+      const usersContainer = document.getElementById('users-container');
+      
+      loadingEl.style.display = 'block';
+      errorEl.style.display = 'none';
+      usersContainer.style.display = 'none';
+      
+      try {
+        const response = await fetch('/api/users');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const users = await response.json();
+        
+        if (users.length === 0) {
+          usersContainer.innerHTML = '<p style="text-align: center; color: #6c757d;">No users found.</p>';
+        } else {
+          usersContainer.innerHTML = users.map(user => `
+            <div class="user-card">
+              <h3>${user.firstName} ${user.lastName}</h3>
+              <div class="user-info">
+                <strong>ID:</strong> <span>${user.id}</span>
+              </div>
+              <div class="user-info">
+                <strong>First Name:</strong> <span>${user.firstName}</span>
+              </div>
+              <div class="user-info">
+                <strong>Last Name:</strong> <span>${user.lastName}</span>
+              </div>
+              <div class="user-info">
+                <strong>Role:</strong> 
+                <span class="role-badge role-${user.role || 'guest'}">${user.role || 'guest'}</span>
+              </div>
+              <div class="user-info" style="margin-top: 15px; font-size: 0.85rem; color: #6c757d;">
+                <strong>Created:</strong> <span>${new Date(user._created).toLocaleString()}</span>
+              </div>
+            </div>
+          `).join('');
+        }
+        
+        loadingEl.style.display = 'none';
+        usersContainer.style.display = 'grid';
+      } catch (error) {
+        loadingEl.style.display = 'none';
+        errorEl.textContent = `Error loading users: ${error.message}`;
+        errorEl.style.display = 'block';
+      }
+    }
+
+    // Load users when page loads
+    loadUsers();
+  </script>
+</body>
+</html>
+
