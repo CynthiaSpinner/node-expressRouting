@@ -2,20 +2,6 @@
 
 A full-stack Node.js application built with Express.js that provides a RESTful API for user management with a modern, responsive web interface. This project demonstrates Express routing, CRUD operations, and serves both API endpoints and static web pages.
 
-## 🎥 Demo Video
-
-Watch the application in action:
-
-<div align="center">
-  
-**📹 [Click here to view the demo video](./docs/Recording%202025-11-12%20142844.mp4)**
-
-*The video demonstrates the full application functionality including the web interface and API endpoints.*
-
-</div>
-
-> **Tip:** For best viewing experience, download the video file from the `docs/` folder. GitHub's markdown renderer has limited support for embedded video playback.
-
 ## ✨ Features
 
 - **RESTful API** - Complete CRUD operations for user management
@@ -179,8 +165,6 @@ node-expressRouting/
 │   └── index.js              # Environment configuration loader
 ├── mockdb/
 │   └── index.js              # Mock database service with CRUD methods
-├── docs/
-│   └── Recording 2025-11-12 142844.mp4  # Demo video
 ├── public/
 │   ├── css/
 │   │   └── style.css         # Application stylesheet
