@@ -6,11 +6,13 @@ A full-stack Node.js application built with Express.js that provides a RESTful A
 
 Watch the application in action:
 
-<video width="100%" controls style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin: 20px 0;">
-  <source src="./public/videos/Recording 2025-11-12 142844.mp4" type="video/mp4">
-  Your browser does not support the video tag. 
-  [Download the video](./public/videos/Recording%202025-11-12%20142844.mp4) to view it.
-</video>
+<div align="center">
+  <video width="100%" controls style="border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); margin: 20px 0; max-width: 800px;">
+    <source src="docs/Recording%202025-11-12%20142844.mp4" type="video/mp4">
+    <source src="./docs/Recording 2025-11-12 142844.mp4" type="video/mp4">
+    Your browser does not support the video tag. [Download the video](./docs/Recording%202025-11-12%20142844.mp4) to view it.
+  </video>
+</div>
 
 ## ✨ Features
 
@@ -175,11 +177,11 @@ node-expressRouting/
 │   └── index.js              # Environment configuration loader
 ├── mockdb/
 │   └── index.js              # Mock database service with CRUD methods
+├── docs/
+│   └── Recording 2025-11-12 142844.mp4  # Demo video
 ├── public/
 │   ├── css/
 │   │   └── style.css         # Application stylesheet
-│   ├── videos/
-│   │   └── Recording 2025-11-12 142844.mp4
 │   ├── index.html            # Home page
 │   └── users.html            # Users display page
 ├── routes/
