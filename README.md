@@ -36,7 +36,11 @@ cd node-expressRouting
 npm install
 ```
 
-3. Create a `.env` file in the root directory with your configuration values.
+3. Create a `.env` file in the root directory:
+```bash
+cp env.example .env
+```
+Then edit `.env` and update the values with your actual configuration (especially `DB_PASS` and `DB_SCHEMA`).
 
 4. Start the MySQL service and ensure your database is set up.
 
@@ -111,6 +115,7 @@ node-expressRouting/
 │   └── employees.routes.js   # Employee CRUD routes
 ├── server.js                 # Express server setup
 ├── .babelrc                  # Babel configuration
+├── env.example               # Example environment variables file
 ├── package.json
 └── README.md
 ```
