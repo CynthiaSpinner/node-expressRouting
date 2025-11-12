@@ -1,15 +1,17 @@
-# Express User Management API
+# Express User & Employee Management API
 
-A full-stack Node.js application built with Express.js that provides a RESTful API for user management with a modern, responsive web interface. This project demonstrates Express routing, CRUD operations, and serves both API endpoints and static web pages.
+A full-stack Node.js application built with Express.js that provides RESTful APIs for managing users and employees with a modern, responsive web interface. Features include complete CRUD operations, MySQL database integration, and an intuitive frontend with search and inline editing capabilities.
 
 ## ✨ Features
 
-- **RESTful API** - Complete CRUD operations for user management
+- **Dual Data Management** - Manage both users (mock data) and employees (MySQL database)
+- **Full CRUD Operations** - Create, Read, Update, and Delete functionality for both entities
 - **Modern Web Interface** - Beautiful, responsive UI with gradient design and smooth animations
+- **MySQL Database Integration** - Real database connectivity for employee data persistence
+- **Search Functionality** - Real-time search and filtering for employees
+- **Inline Editing** - Edit employees directly on their cards without separate forms
 - **Modular Routing** - Organized Express routes with separate route files
-- **Mock Database** - In-memory data storage for development and testing
-- **ES6 Modules** - Modern JavaScript syntax with Babel transpilation
-- **Error Handling** - Centralized error handling middleware
+- **Error Handling** - Comprehensive error handling middleware
 - **Static File Serving** - Serves HTML, CSS, and media files
 - **Development Tools** - Hot reload with nodemon for faster development
 
@@ -19,6 +21,7 @@ A full-stack Node.js application built with Express.js that provides a RESTful A
 
 - Node.js (v14 or higher)
 - npm (Node Package Manager)
+- MySQL Server (for employee data)
 
 ### Installation
 
@@ -33,14 +36,9 @@ cd node-expressRouting
 npm install
 ```
 
-3. Create a `.env` file in the root directory:
-```env
-PORT=5000
-DB_HOST=localhost
-DB_USER=root
-DB_PASS=password
-DB_SCHEMA=your_database
-```
+3. Create a `.env` file in the root directory with your configuration values.
+
+4. Start the MySQL service and ensure your database is set up.
 
 ### Running the Application
 
@@ -54,108 +52,39 @@ npm run dev
 npm start
 ```
 
-The server will start on `http://localhost:5000` (or the port specified in your `.env` file).
+The server will start on `http://localhost:5000` (or the port specified in your configuration).
 
 ## 📖 Usage
 
 ### Web Interface
 
 - **Home Page**: `http://localhost:5000/` - API documentation and navigation
-- **Users Page**: `http://localhost:5000/users` - Visual display of all users in a card-based layout
+- **Users Page**: `http://localhost:5000/users` - Full CRUD interface for users (mock data)
+- **Employees Page**: `http://localhost:5000/employees` - Full CRUD interface for employees (MySQL database) with search and inline editing
 
 ### API Endpoints
 
 All API endpoints are prefixed with `/api`.
 
-#### Get All Users
-```http
-GET /api/users
-```
+#### User Endpoints
 
-**Response:**
-```json
-[
-  {
-    "id": 1,
-    "firstName": "Frodo",
-    "lastName": "Baggins",
-    "role": "admin",
-    "_created": "Wed Nov 12 2025 14:28:44 GMT-0500"
-  },
-  ...
-]
-```
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/users` | Get all users |
+| `GET` | `/api/users/:id` | Get user by ID |
+| `POST` | `/api/users` | Create a new user |
+| `PUT` | `/api/users/:id` | Update a user |
+| `DELETE` | `/api/users/:id` | Delete a user |
 
-#### Get User by ID
-```http
-GET /api/users/:id
-```
+#### Employee Endpoints
 
-**Example:**
-```http
-GET /api/users/1
-```
-
-#### Create User
-```http
-POST /api/users
-Content-Type: application/json
-
-{
-  "firstName": "John",
-  "lastName": "Doe",
-  "role": "member"
-}
-```
-
-**Response:**
-```json
-{
-  "insertedRow": {
-    "id": 5,
-    "firstName": "John",
-    "lastName": "Doe",
-    "role": "member",
-    "_created": "Wed Nov 12 2025 14:28:44 GMT-0500"
-  },
-  "success": true
-}
-```
-
-#### Update User
-```http
-PUT /api/users/:id
-Content-Type: application/json
-
-{
-  "firstName": "Jane",
-  "lastName": "Doe",
-  "role": "admin"
-}
-```
-
-**Example:**
-```http
-PUT /api/users/1
-```
-
-#### Delete User
-```http
-DELETE /api/users/:id
-```
-
-**Example:**
-```http
-DELETE /api/users/1
-```
-
-**Response:**
-```json
-{
-  "removedRowId": 1,
-  "success": true
-}
-```
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/employees` | Get all employees |
+| `GET` | `/api/employees/:id` | Get employee by ID |
+| `POST` | `/api/employees` | Create a new employee |
+| `PUT` | `/api/employees/:id` | Update an employee |
+| `DELETE` | `/api/employees/:id` | Delete an employee |
 
 ## 📁 Project Structure
 
@@ -163,20 +92,25 @@ DELETE /api/users/1
 node-expressRouting/
 ├── config/
 │   └── index.js              # Environment configuration loader
+├── controllers/
+│   └── employees.controller.js  # Employee database controllers
+├── db/
+│   ├── index.js              # MySQL connection pool
+│   └── utils.js              # Database query utility
 ├── mockdb/
-│   └── index.js              # Mock database service with CRUD methods
+│   └── index.js              # Mock database service for users
 ├── public/
 │   ├── css/
 │   │   └── style.css         # Application stylesheet
 │   ├── index.html            # Home page
-│   └── users.html            # Users display page
+│   ├── users.html            # Users management page
+│   └── employees.html        # Employees management page
 ├── routes/
-│   ├── index.js              # Main router (mounts user routes)
-│   └── users.routes.js       # User CRUD routes
-├── server.js                 # Express server setup and configuration
+│   ├── index.js              # Main router
+│   ├── users.routes.js       # User CRUD routes
+│   └── employees.routes.js   # Employee CRUD routes
+├── server.js                 # Express server setup
 ├── .babelrc                  # Babel configuration
-├── .env                      # Environment variables (create from .env.template)
-├── .env.template             # Environment variables template
 ├── package.json
 └── README.md
 ```
@@ -185,45 +119,11 @@ node-expressRouting/
 
 - **Node.js** - JavaScript runtime environment
 - **Express.js** - Web application framework
+- **MySQL** - Relational database management system
 - **Babel** - JavaScript compiler for ES6+ syntax
 - **Nodemon** - Development tool for auto-restarting server
 - **dotenv** - Environment variable management
 - **HTML5/CSS3** - Modern web standards for the frontend
-
-## ⚙️ Configuration
-
-### Environment Variables
-
-The application uses the following environment variables (defined in `.env`):
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `PORT` | Server port number | `5000` |
-| `DB_HOST` | Database host address | `localhost` |
-| `DB_USER` | Database username | `root` |
-| `DB_PASS` | Database password | - |
-| `DB_SCHEMA` | Database schema name | - |
-
-### Mock Database
-
-The `mockdb` service provides an in-memory database with the following methods:
-
-- `getAll()` - Returns all users as an array
-- `getOne(id)` - Returns a single user by ID (returns `null` if not found)
-- `add(newUser)` - Adds a new user and returns the inserted user with success status
-- `update(id, updatedUser)` - Updates an existing user and returns the updated user
-- `remove(id)` - Removes a user by ID and returns success status
-
-**User Object Structure:**
-```javascript
-{
-  id: Number,
-  firstName: String,
-  lastName: String,
-  role: String, // 'admin', 'member', or 'guest'
-  _created: String // ISO date string
-}
-```
 
 ## 🎨 Features in Detail
 
@@ -234,7 +134,9 @@ The `mockdb` service provides an in-memory database with the following methods:
 - **Interactive Elements** - Hover effects, smooth transitions, and animations
 - **Color-Coded Methods** - Visual indicators for HTTP methods (GET, POST, PUT, DELETE)
 - **Role Badges** - Visual distinction for user roles (admin, member, guest)
-- **Real-time Updates** - JavaScript-powered dynamic content loading
+- **Real-time Search** - Instant filtering of employees by name or title
+- **Inline Editing** - Edit employees directly on their cards without page navigation
+- **Dynamic Content** - JavaScript-powered real-time updates
 
 ### API Features
 
@@ -242,7 +144,14 @@ The `mockdb` service provides an in-memory database with the following methods:
 - **JSON Format** - All requests and responses use JSON
 - **Error Handling** - Centralized error middleware for consistent error responses
 - **Async Operations** - Uses async/await for database operations
-- **Modular Architecture** - Separated route files for better organization
+- **Modular Architecture** - Separated route and controller files for better organization
+- **Database Integration** - MySQL connection pooling for efficient database access
+
+### Data Management
+
+- **Users** - Managed via in-memory mock database (resets on server restart)
+- **Employees** - Managed via MySQL database (persistent storage)
+- **Full CRUD** - Complete Create, Read, Update, Delete operations for both entities
 
 ## 🔧 Development
 
@@ -258,6 +167,7 @@ The `mockdb` service provides an in-memory database with the following methods:
 - ES6 modules (import/export)
 - Async/await for asynchronous operations
 - Express Router for route organization
+- Controller pattern for database operations
 
 ## 📝 API Documentation Summary
 
@@ -269,6 +179,11 @@ The `mockdb` service provides an in-memory database with the following methods:
 | `POST` | `/api/users` | Create a new user |
 | `PUT` | `/api/users/:id` | Update an existing user |
 | `DELETE` | `/api/users/:id` | Delete a user |
+| `GET` | `/api/employees` | Retrieve all employees |
+| `GET` | `/api/employees/:id` | Retrieve a single employee by ID |
+| `POST` | `/api/employees` | Create a new employee |
+| `PUT` | `/api/employees/:id` | Update an existing employee |
+| `DELETE` | `/api/employees/:id` | Delete an employee |
 
 ## 🤝 Contributing
 
@@ -284,4 +199,4 @@ Ben Bryant
 
 ---
 
-**Built with ❤️ using Express.js and Node.js**
+**Built with ❤️ using Express.js, Node.js, and MySQL**
