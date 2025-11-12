@@ -224,6 +224,18 @@ header p {
   flex-wrap: wrap;
 }
 
+nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+nav .btn {
+  margin: 0;
+  margin-top: 0;
+}
+
 @media (max-width: 768px) {
   header h1 {
     font-size: 2rem;

@@ -20,6 +20,11 @@ app.get("/users", (req, res) => {
   res.sendFile("users.html", { root: "public" });
 });
 
+// Employees page route
+app.get("/employees", (req, res) => {
+  res.sendFile("employees.html", { root: "public" });
+});
+
 //using the imported router to handle all requests
 app.use("/api", router);
 
