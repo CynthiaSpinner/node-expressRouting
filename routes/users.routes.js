@@ -3,7 +3,7 @@ import db from "../mockdb/index.js";
 
 const router = express.Router();
 
-//get route /api/users or /api/users/:id
+//get /api/users or /api/users/:id
 router.get("/:id?", async (req, res) => {
  const { id } = req.params;
  let data;
@@ -17,14 +17,14 @@ router.get("/:id?", async (req, res) => {
  res.json(data);
 });
 
-//post route /api/users
+//post /api/users
 router.post("/", async (req, res) => {
     const newUser = req.body;
     const data = await db.add(newUser);
     res.json(data);
 });
 
-//put route /api/users/:id
+//put /api/users/:id
 router.put("/:id", async (req, res) => {
     const { id } = req.params;
     const updatedUser = req.body;
@@ -32,7 +32,7 @@ router.put("/:id", async (req, res) => {
     res.json(data);
 });
 
-//delete route /api/users/:id
+//delete /api/users/:id
 router.delete("/:id", async (req, res) => {
     const { id } = req.params;
     const data = await db.remove(id);
